@@ -2,13 +2,13 @@
 title: about
 date: 2023-06-10 18:35:55
 ---
-> ## About me
+> ### About me
 
 苟士学  中国科学院广州生物医药与健康研究院  助理研究员 \
 电子邮件: gou_shixue@gibh.ac.cn \
 地址：广州市萝岗区开源大道190号
 
-> ## Education
+> ### Education
 
 - 2012-2016    河南师范大学  生物技术   学士
 - 2016-2018    中国科学院广州生物医药与健康研究院  发育生物学   硕士
@@ -16,20 +16,20 @@ date: 2023-06-10 18:35:55
 - 2021-2023    中国科学院广州生物医药与健康研究院  发育生物学   博士后
 - 2023至今      中国科学院广州生物医药与健康研究院   助理研究员
 
-> ## Science and Research
+> ### Science and Research
 
 - NGS data analysis (RNA-seq, ChIP-seq, ATAC-seq, CUT&Tag, WES, WGS, scRNA-seq and scATAC-seq)
 - Public database data mining: TCGA and GEO
 - Gene editing, Gene therapy and Animal model of human disease (pig, rabbit, mouse, rat)
 - early embryonic development (ZGA initiation)
 
-> ## Programming skills
+> ### Programming skills
 
 - Shell, R, Python, Docker, Git
 - Workflow & environment management: Shell, Snakemake, Conda
 - Website development & interactive visualization: RShiny, CSS, HTML
 
-> ## Published papers
+> ### Published papers
 
 1. Li N, **Gou S**, Wang J, Zhang Q, Huang X, Xie J, Li L, Jin Q, Ouyang Z, Chen F, Ge W, Shi H, Liang Y, Zhuang Z, Zhao X, Lian M, Ye Y, Quan L, Wu H, Lai L, Wang K. CRISPR/Cas9-Mediated Gene Correction in Newborn Rabbits with Hereditary Tyrosinemia Type I. Mol Ther. 2021 Mar 3;29(3):1001-1015. doi: 10.1016/j.ymthe.2020.11.023. Epub 2020 Nov 20. PMID: 33221434; PMCID: PMC7934638.
 2. Chen M, Shi H, **Gou S**, Wang X, Li L, Jin Q, Wu H, Zhang H, Li Y, Wang L, Li H, Lin J, Guo W, Jiang Z, Yang X, Xu A, Zhu Y, Zhang C, Lai L, Li X. In vivo genome editing in mouse restores dystrophin expression in Duchenne muscular dystrophy patient muscle fibers. Genome Med. 2021 Apr 12;13(1):57. doi: 10.1186/s13073-021-00876-0. PMID: 33845891; PMCID: PMC8042958.
