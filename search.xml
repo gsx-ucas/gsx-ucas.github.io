@@ -32,15 +32,14 @@
 
 <h4 id="2-2-Reads比对到参考基因组"><a href="#2-2-Reads比对到参考基因组" class="headerlink" title="2.2 Reads比对到参考基因组"></a>2.2 Reads比对到参考基因组</h4><p>目前常用的人类参考基因组是hg38，但是hg38版本的参考基因组有很多未知位置的基因组片段(alternative contigs, 例如)，建议将这些序列去除，只用常规染色体(chr1..chr22, chX, chrY)进行分析。否则，reads可能不是唯一比对，因此将被分配低比对质量分数。<a href="https://www.biostars.org/p/342482/">Biostars</a>上有关于这个问题的讨论。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rule bowtie2:</span><br><span class="line">input:</span><br><span class="line">    r1=<span class="string">&#x27;Trim/&#123;samples&#125;_R1.fq.gz&#x27;</span>,</span><br><span class="line">    r2=<span class="string">&#x27;Trim/&#123;samples&#125;_R2.fq.gz&#x27;</span></span><br><span class="line">output:</span><br><span class="line">    bam = <span class="string">&#x27;Mapping/&#123;samples&#125;.bam&#x27;</span>,</span><br><span class="line">    <span class="built_in">sum</span> = <span class="string">&#x27;Mapping/&#123;samples&#125;_aln_sum.txt&#x27;</span></span><br><span class="line">shell:</span><br><span class="line">    <span class="string">&#x27;&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">        bowtie2 -X 700 -p 10 --end-to-end --very-sensitive \</span></span><br><span class="line"><span class="string">        --no-mixed --no-discordant --phred33 -I 10 \</span></span><br><span class="line"><span class="string">        -x hg38_bt2index/genome \</span></span><br><span class="line"><span class="string">        -1 &#123;input.r1&#125; \</span></span><br><span class="line"><span class="string">        -2 &#123;input.r2&#125; \</span></span><br><span class="line"><span class="string">        2&gt; &#123;output.sum&#125; | \</span></span><br><span class="line"><span class="string">        samtools view -@ 10 -ShuF 4 -f 2 -q 30 - | \</span></span><br><span class="line"><span class="string">        samtools sort -@ 10 -n - -T Mapping/&#123;wildcards.samples&#125;_tmp -o &#123;output.bam&#125;</span></span><br><span class="line"><span class="string">    &#x27;</span><span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>————————————– 未完待续————————————</p>
+<p>—————————————————————————- 未完待续 ————————————————————————</p>
 ]]></content>
       <categories>
         <category>Analysis Tutorial</category>
-        <category>Analysis Notes</category>
       </categories>
       <tags>
         <tag>CUT&amp;Tag</tag>
-        <tag>chromatin</tag>
+        <tag>Chromatin</tag>
       </tags>
   </entry>
   <entry>
