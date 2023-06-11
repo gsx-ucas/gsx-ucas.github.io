@@ -14,7 +14,7 @@ categories:
 > **需要用到的软件如下：**
 >
 > - fastp: 去接头，生成质控报告
-> - hisat2: 比对测序数据到基因组，兼容bowtie2大部分参数
+> - bowtie2: 比对测序数据到基因组
 > - samtools/sambamba: 处理比对后的bam/sam文件，例如排序（sort）和去重（markdup）等
 > - bedtools: 用大肠杆菌的基因组进行校准(Spike-in calibration)
 > - MACS2: 进行peak calling，原流程还推荐了SEACR
@@ -36,7 +36,7 @@ categories:
 **以我的理解** 1. 长测序reads比如PE150，最好还是先执行去接头的操作，然后再进行比对。2. 只要比对率能够接受，用常用的比对参数进行比对也是可以的。
 去接头的软件我推荐[fastp](https://github.com/OpenGene/fastp), 一是它去的干净且能够自动检测接头序列，二是它的速度真的很快。
 
-```
+```bash
 # 以下代码利用snakemake进行流程控制，具体规则可参考[snakemake文档](https://snakemake.readthedocs.io/en/stable/)。
 input:
     r1='SeqData/LR/CD8_BCL11B_CUTTag/{samples}_R1.fastq.gz',
@@ -64,7 +64,7 @@ shell:
 
 #### 2.1 建立基因组index
 
-```
+```bash
 # 建立人基因组参考hg38的index
 bowtie2-build hg38.chrom.fasta hg38_bt2index/genome
 # 建立大肠杆菌E.coli的index
@@ -75,7 +75,7 @@ bowtie2-build E.coli.fasta E.coli_bt2index/genome
 
 目前常用的人类参考基因组是hg38，但是hg38版本的参考基因组有很多未知位置的基因组片段(alternative contigs, 例如)，建议将这些序列去除，只用常规染色体(chr1..chr22, chX, chrY)进行分析。否则，reads可能不是唯一比对，因此将被分配低比对质量分数。[Biostars](https://www.biostars.org/p/342482/)上有关于这个问题的讨论。
 
-```
+```bash
 rule bowtie2:
 input:
     r1='Trim/{samples}_R1.fq.gz',
@@ -90,9 +90,10 @@ shell:
         -x hg38_bt2index/genome \
         -1 {input.r1} \
         -2 {input.r2} \
-        --summary-file {output.sum} | \
+        2> {output.sum} | \
         samtools view -@ 10 -ShuF 4 -f 2 -q 30 - | \
-        samtools sort -@ 10 - -T Mapping/{wildcards.samples}_tmp -o {output.bam}
+        samtools sort -@ 10 -n - -T Mapping/{wildcards.samples}_tmp -o {output.bam}
     '''
 ```
+-------------------------------------- 未完待续------------------------------------
 
