@@ -72,7 +72,7 @@ bowtie2-build E.coli.fasta E.coli_bt2index/genome
 
 ### Reads比对到参考基因组
 
-目前常用的人类参考基因组是hg38，但是hg38版本的参考基因组有很多未知位置的基因组片段(alternative contigs, 例如)，建议将这些序列去除，只用常规染色体(chr1..chr22, chX, chrY)进行分析。否则，reads可能不是唯一比对，因此将被分配低比对质量分数。[Biostars](https://www.biostars.org/p/342482/)上有关于这个问题的讨论。
+目前常用的人类参考基因组是hg38，但是hg38版本的参考基因组有很多未知位置的基因组片段(alternative contigs, 例如)，建议将这些序列去除，只用常规染色体(chr1..chr22, chX, chrY)进行分析。否则，reads可能不是唯一比对，因此将被分配低比对质量分数。[Biostars](https://www.biostars.org/p/342482/)上有关于这个问题的讨论。其他物种如果有同样的情况，建议也这样做。
 
 ``` bash
 rule bowtie2:
@@ -89,9 +89,9 @@ shell:
         -x hg38_bt2index/genome \
         -1 {input.r1} \
         -2 {input.r2} \
-        2> {output.sum} | \
-        samtools view -@ 10 -ShuF 4 -f 2 -q 30 - | \
-        samtools sort -@ 10 -n - -T Mapping/{wildcards.samples}_tmp -o {output.bam}
+        2> {output.sum} | \ # 将比对记录导出
+        samtools view -@ 10 -ShuF 4 -f 2 -q 20 - | \ # 剔除未比对的reads(-F 4)，保留双端比对同时比对质量大于20的reads(-f 2 -q 20)
+        samtools sort -@ 10 -n - -o {output.bam} # 对序列进行排序，默认按坐标排序
     '''
 ```
 ---------------------------------------------------------------------------- 未完待续 ------------------------------------------------------------------------
