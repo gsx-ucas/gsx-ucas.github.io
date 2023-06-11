@@ -26,7 +26,7 @@ categories:
 > - blacklist_region: [基因组黑名单区域](https://github.com/Boyle-Lab/Blacklist/tree/master/lists)，这些区域在多种NGS测序数据中产生异常信号值，影响数据结果。因此进行peak calling之后需要将这些区域去除。
 > - chromsize file: 记录基因组染色体大小的文件，这个文件可以在UCSC数据库中下载到，如人的基因组对应的该文件[hg38.chrom.sizes](https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/)
 
-## 1. Reads去接头
+## Reads去接头
 
 在[原教程中](https://yezhengstat.github.io/CUTTag_tutorial/#311_Alignment_to_HG38)提到 *There is no need to trim reads from out standard 25x25 PE sequencing, as adapter sequences will not be included in reads of inserts >25 bp. However, for users performing longer sequencing, reads will need to be trimmed by Cutadapt and mapped by `--local --very-sensitive --no-mixed --no-discordant --phred33 -I 10 -X 700` to ignore any remaining adapter sequence at the 3’ ends of reads during mapping.* 
 
@@ -57,11 +57,11 @@ shell:
     '''
 ```
 
-## 2. Reads比对至基因组
+## Reads比对至基因组
 
 这一步将进行两次比对，首先将reads比对到参考基因组(如人的hg38，小鼠的mm10)，然后将reads比对到大肠杆菌基因组. [原教程中](https://yezhengstat.github.io/CUTTag_tutorial/#V_Spike-in_calibration)提到*E. coli DNA is carried along with bacterially-produced pA-Tn5 protein and gets tagmented non-specifically during the reaction.* 因为在建库的过程中使用的重组蛋白A/G-MNase残留有大肠杆菌DNA，假设一系列样本，每个样本使用相同数量的细胞，那么比对到到参考基因组的reads与大肠杆菌基因组的比例是相同的。因此，可以通过计算比对到大肠杆菌基因组的reads比例来进行比对信号的标准化。
 
-### 2.1 建立基因组index
+### 建立基因组index
 
 ``` bash
 # 建立人基因组参考hg38的index
@@ -70,7 +70,7 @@ bowtie2-build hg38.chrom.fasta hg38_bt2index/genome
 bowtie2-build E.coli.fasta E.coli_bt2index/genome
 ```
 
-### 2.2 Reads比对到参考基因组
+### Reads比对到参考基因组
 
 目前常用的人类参考基因组是hg38，但是hg38版本的参考基因组有很多未知位置的基因组片段(alternative contigs, 例如)，建议将这些序列去除，只用常规染色体(chr1..chr22, chX, chrY)进行分析。否则，reads可能不是唯一比对，因此将被分配低比对质量分数。[Biostars](https://www.biostars.org/p/342482/)上有关于这个问题的讨论。
 
