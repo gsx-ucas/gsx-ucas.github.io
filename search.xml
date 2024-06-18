@@ -43,8 +43,33 @@
       </tags>
   </entry>
   <entry>
+    <title>GitHub无法访问、443 Operation timed out</title>
+    <url>/2023/06/13/change_github_hosts/</url>
+    <content><![CDATA[<blockquote>
+<p>针对以下情况: <br>1.无法访问github，重启电脑，重置网络都无法正常访问。 <br>2.”科学上网”可以访问到GitHub，但是命令行<code>git pull、push</code>等命令无法访问远程库，显示‘Failed to connect to github.com port 443: Operation timed out’。</p>
+<p>解决方法：修改系统hosts文件 <br><a href="https://juejin.cn/post/6844904193170341896">文章参考</a></p>
+</blockquote>
+<h1 id="查询github-com的IP地址"><a href="#查询github-com的IP地址" class="headerlink" title="查询github.com的IP地址"></a>查询github.com的IP地址</h1><p>打开该网址<a href="https://www.ipaddress.com/site/github.com">https://www.ipaddress.com/site/github.com</a><br><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde579dbb3de8~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<h1 id="查询github-global-ssl-fastly-net的IP地址"><a href="#查询github-global-ssl-fastly-net的IP地址" class="headerlink" title="查询github.global.ssl.fastly.net的IP地址"></a>查询github.global.ssl.fastly.net的IP地址</h1><p>打开该网址<a href="https://www.ipaddress.com/site/github.global.ssl.fastly.net">https://www.ipaddress.com/site/github.global.ssl.fastly.net</a><br><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde57a05985dd~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<h1 id="查询assets-cdn-github-com的IP地址"><a href="#查询assets-cdn-github-com的IP地址" class="headerlink" title="查询assets-cdn.github.com的IP地址"></a>查询assets-cdn.github.com的IP地址</h1><p>打开该网址<a href="https://www.ipaddress.com/site/assets-cdn.github.com">https://www.ipaddress.com/site/assets-cdn.github.com</a><br><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde57a0a40370~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp"></p>
+<h1 id="修改hosts文件"><a href="#修改hosts文件" class="headerlink" title="修改hosts文件"></a>修改hosts文件</h1><p>Linux和MacOS的hosts文件在&#x2F;etc&#x2F;hosts，可以用vim等编辑器打开，需要管理员权限<br>将刚刚复制的IP地址填写到hosts中，网站名称跟在IP之后，然后保存</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">140.82.113.4 github.com </span><br><span class="line">199.232.69.194 github.global.ssl.fastly.net</span><br><span class="line">185.199.108.153  assets-cdn.github.com</span><br><span class="line">185.199.109.153  assets-cdn.github.com</span><br><span class="line">185.199.110.153  assets-cdn.github.com</span><br><span class="line">185.199.111.153  assets-cdn.github.com</span><br></pre></td></tr></table></figure>
+
+<h1 id="刷新DNS"><a href="#刷新DNS" class="headerlink" title="刷新DNS"></a>刷新DNS</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo killall -HUP mDNSResponder</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Linux</category>
+        <category>Troubles</category>
+      </categories>
+      <tags>
+        <tag>GitHub</tag>
+        <tag>Troubleshooting</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
-    <url>/2023/06/13/hello-world/</url>
+    <url>/2024/06/18/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
